@@ -71,17 +71,17 @@
     <div class="modal" onclick="event.stopPropagation()">
         <h2 style="text-align:center; margin-bottom:12px; letter-spacing:2px; font-size:16px;">V12 GARAGE</h2>
         <div class="row">SYSTEM <button class="tog-btn" onclick="goFull()" style="background:#00e5ff; color:#000; border:none;">FULL SCREEN</button></div>
-        <div class="row">VOICE ARTIST <select id="artist-sel" onchange="setCfg('artist', this.value)">
+        <div class="row">VOICE ARTIST <select id="artist-sel" onchange="setCfg('art', this.value)">
             <option value="amitabh">Mr. Bachchan</option>
             <option value="lady">Sweet Lady</option>
         </select></div>
-        <div class="row">LAYOUT & VOICE <button class="tog-btn" onclick="tog('guj')" id="l-btn">ENG</button></div>
-        <div class="row">VOICE MASTER <button class="tog-btn" onclick="tog('voice')" id="v-btn">ON</button></div>
-        <div class="row">BEEP PROF <select id="b-sel" onchange="setCfg('bProf', this.value)"></select></div>
-        <div class="row">PIANO PROF <select id="p-sel" onchange="setCfg('pProf', this.value)"></select></div>
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
-            <div style="font-weight:900; font-size:10px; color:#888;">LOGBOOK</div>
-            <button onclick="clearHist()" style="background:none; border:none; color:red; font-size:10px; font-weight:bold; cursor:pointer;">CLEAR ALL</button>
+        <div class="row">LAYOUT & VOICE <button class="tog-btn" onclick="tog('isG')" id="l-btn">ENG</button></div>
+        <div class="row">VOICE MASTER <button class="tog-btn" onclick="tog('s')" id="v-btn">ON</button></div>
+        <div class="row">BEEP PROF <select id="b-sel" onchange="setCfg('bp', this.value)"></select></div>
+        <div class="row">PIANO PROF <select id="p-sel" onchange="setCfg('pp', this.value)"></select></div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px; padding: 0 5px;">
+            <div style="font-weight:900; font-size:10px; color:#888;">LOGBOOK (LAST 10)</div>
+            <button onclick="clearHist()" style="background:none; border:none; color:#ff4444; font-size:10px; font-weight:bold; cursor:pointer;">CLEAR HISTORY</button>
         </div>
         <div id="hist-scroll"></div>
         <button class="tog-btn" style="width:100%; margin-top:10px; background:#000; color:#fff; height:40px;" onclick="openGarage()">EXIT</button>
@@ -92,18 +92,17 @@
     let expr = "", liveAns = "0", isRes = false, displayExpr = "", speakTimer;
     const aCtx = new (window.AudioContext || window.webkitAudioContext)();
     const gMap = {'0':'૦','1':'૧','2':'૨','3':'૩','4':'૪','5':'૫','6':'૬','7':'૭','8':'૮','9':'૯','00':'૦૦'};
-    
     const gWords = {'+':'વત્તા','-':'ઓછા','*':'ગુણાકાર','/':'ભાગાકાર','%':'ટકા','=':'જવાબ','AC':'સાફ કરો','DEL':'કાઢી નાખો'};
     const eWords = {'+':'Plus','-':'Minus','*':'Multiply','/':'Divide','%':'Percent','=':'Result is','AC':'Clear','DEL':'Delete'};
 
+    // THEME & SOUND CONFIG (FORCED LOAD)
     let cfg = { 
         tIdx: parseInt(localStorage.getItem('v12_tIdx')) || 0, 
         isG: localStorage.getItem('v12_isG') === 'true',
-        vol: 0.7, 
-        artist: localStorage.getItem('v12_art') || "amitabh",
-        bProf: localStorage.getItem('v12_bp') || "b1",
-        pProf: localStorage.getItem('v12_pp') || "p1",
-        voice: localStorage.getItem('v12_s') !== 'false'
+        art: localStorage.getItem('v12_art') || "amitabh",
+        bp: localStorage.getItem('v12_bp') || "b1",
+        pp: localStorage.getItem('v12_pp') || "p1",
+        s: localStorage.getItem('v12_s') !== 'false'
     };
 
     const beeps = [{n:"Mute",f:0},{n:"Soft Tap",f:800,t:'sine',d:0.08,g:0.3},{n:"Silk Touch",f:1200,t:'sine',d:0.04,g:0.2},{n:"Digital Click",f:2000,t:'square',d:0.02,g:0.1},{n:"Low Pulse",f:150,t:'triangle',d:0.12,g:0.4},{n:"Bubble Pop",f:600,t:'sine',d:0.15,g:0.4},{n:"Feather",f:1800,t:'sine',d:0.06,g:0.2},{n:"Glass Ting",f:2800,t:'sine',d:0.08,g:0.3},{n:"Sport Beep",f:1100,t:'sawtooth',d:0.04,g:0.1},{n:"Eco Click",f:450,t:'sine',d:0.06,g:0.3}];
@@ -125,20 +124,20 @@
     };
 
     function speak(text) {
-        if(!cfg.voice) return;
+        if(!cfg.s) return;
         window.speechSynthesis.cancel();
         const u = new SpeechSynthesisUtterance(text);
         u.lang = cfg.isG ? 'gu-IN' : 'en-IN';
-        u.pitch = (cfg.isG) ? 1.0 : (cfg.artist === 'amitabh' ? 0.4 : 1.1);
-        u.rate = 0.95;
+        u.pitch = (cfg.isG) ? 1.0 : (cfg.art === 'amitabh' ? 0.4 : 1.1);
+        u.rate = 1.0;
         window.speechSynthesis.speak(u);
     }
 
     function handleInput(v) {
-        const b = beeps[parseInt(cfg.bProf.slice(1))];
-        const p = pianos[parseInt(cfg.pProf.slice(1))];
+        const b = beeps[parseInt(cfg.bp.slice(1))];
+        const p = pianos[parseInt(cfg.pp.slice(1))];
         if(b && b.f > 0) genSound(b.f, b.t, b.d, b.g);
-        if(p && pFreqs[v] && cfg.pProf !== "p0") genSound(pFreqs[v], p.t, p.d, p.g);
+        if(p && pFreqs[v] && cfg.pp !== "p0") genSound(pFreqs[v], p.t, p.d, p.g);
 
         if (v === 'AC') { expr = ""; liveAns = "0"; isRes = false; displayExpr = ""; speak(cfg.isG ? gWords['AC'] : eWords['AC']); }
         else if (v === 'DEL') { expr = expr.slice(0, -1); isRes = false; calc(); }
@@ -162,7 +161,7 @@
                 speakTimer = setTimeout(() => {
                     let segments = expr.split(/[\+\-\*\/]/);
                     speak(segments[segments.length-1]);
-                }, 450);
+                }, 400);
             }
         }
         updateUI();
@@ -192,7 +191,7 @@
     function genSound(f, t, d, gVal) {
         let o = aCtx.createOscillator(), g = aCtx.createGain();
         o.type = t; o.frequency.value = f;
-        g.gain.setValueAtTime(cfg.vol * gVal, aCtx.currentTime);
+        g.gain.setValueAtTime(cfg.vol * gVal || 0.5, aCtx.currentTime);
         g.gain.exponentialRampToValueAtTime(0.001, aCtx.currentTime + d);
         o.connect(g); g.connect(aCtx.destination); o.start(); o.stop(aCtx.currentTime + d);
     }
@@ -206,15 +205,19 @@
 
     function clearHist() {
         localStorage.setItem('v12_logs', "[]");
-        openGarage();
+        renderHist();
     }
 
     function openGarage() {
         document.getElementById('garage-overlay').classList.toggle('active');
+        renderHist();
+    }
+
+    function renderHist() {
         const h = JSON.parse(localStorage.getItem('v12_logs') || "[]");
         document.getElementById('hist-scroll').innerHTML = h.map((i, idx) => `
-            <div class="hist-item"><span style="color:var(--accent);">${idx + 1}.</span><span>${i}</span></div>
-        `).join('') || "<div style='text-align:center; padding-top:20px; font-size:11px; color:#aaa;'>NO HISTORY</div>";
+            <div class="hist-item"><span style="color:var(--accent); font-weight:bold;">${idx + 1}.</span><span>${i}</span></div>
+        `).join('') || "<div style='text-align:center; padding-top:20px; font-size:10px; color:#aaa;'>LOGBOOK EMPTY</div>";
     }
 
     function setCfg(k, v) { 
@@ -223,20 +226,19 @@
     }
 
     function tog(k) { 
-        if(k==='guj') cfg.isG = !cfg.isG; else cfg.voice = !cfg.voice; 
-        localStorage.setItem('v12_isG', cfg.isG); 
-        localStorage.setItem('v12_s', cfg.voice);
+        cfg[k] = !cfg[k]; 
+        localStorage.setItem('v12_'+k, cfg[k]); 
         updateMenu(); 
     }
 
     function updateMenu() {
         document.getElementById('l-btn').innerText = cfg.isG ? "GUJARATI" : "ENGLISH";
-        document.getElementById('v-btn').innerText = cfg.voice ? "ON" : "OFF";
-        document.getElementById('artist-sel').value = cfg.artist;
+        document.getElementById('v-btn').innerText = cfg.s ? "ON" : "OFF";
+        document.getElementById('artist-sel').value = cfg.art;
         document.getElementById('b-sel').innerHTML = beeps.map((b,i)=>`<option value="b${i}">${b.n}</option>`).join('');
         document.getElementById('p-sel').innerHTML = pianos.map((p,i)=>`<option value="p${i}">${p.n}</option>`).join('');
-        document.getElementById('b-sel').value = cfg.bProf; 
-        document.getElementById('p-sel').value = cfg.pProf;
+        document.getElementById('b-sel').value = cfg.bp; 
+        document.getElementById('p-sel').value = cfg.pp;
         updateUI();
     }
 
