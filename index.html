@@ -15,9 +15,10 @@
         .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
         #garage-trigger { color: var(--text); opacity: 0.3; font-size: 11px; letter-spacing: 4px; cursor: pointer; text-transform: uppercase; font-weight: bold; }
         #theme-pulse { width: 45px; height: 8px; background: var(--accent); border-radius: 10px; box-shadow: 0 0 15px var(--accent); cursor: pointer; }
-        #display { margin-bottom: 30px; text-align: right; }
-        #layer-eq { font-size: 1.3rem; color: var(--text); opacity: 0.6; min-height: 1.6em; overflow-x: auto; white-space: nowrap; scrollbar-width: none; direction: ltr; }
-        #layer-ans { font-size: 2.8rem; color: var(--accent); font-weight: 700; margin-top: 5px; }
+        #display { margin-bottom: 30px; text-align: right; overflow: hidden; }
+        #layer-eq { font-size: 1.3rem; color: var(--text); opacity: 0.6; min-height: 1.6em; overflow-x: scroll; white-space: nowrap; scrollbar-width: none; direction: ltr; -webkit-overflow-scrolling: touch; }
+        #layer-eq::-webkit-scrollbar { display: none; }
+        #layer-ans { font-size: 2.8rem; color: var(--accent); font-weight: 700; margin-top: 5px; overflow-x: hidden; }
         .keypad { flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
         .key { background: var(--panel); border: none; border-radius: 25px; font-size: 1.6rem; color: var(--text); box-shadow: 6px 6px 12px var(--shadow), -6px -6px 12px var(--light); display: flex; align-items: center; justify-content: center; transition: 0.1s; outline: none; }
         .key.pressed { box-shadow: inset 4px 4px 10px var(--shadow), inset -4px -4px 10px var(--light); transform: scale(0.95); }
@@ -71,16 +72,13 @@
     <div class="modal" onclick="event.stopPropagation()">
         <h2 style="text-align:center; margin-bottom:12px; letter-spacing:2px; font-size:16px;">V12 GARAGE</h2>
         <div class="row">SYSTEM <button class="tog-btn" onclick="goFull()" style="background:#00e5ff; color:#000; border:none;">FULL SCREEN</button></div>
-        <div class="row">VOICE ARTIST <select id="artist-sel" onchange="setCfg('art', this.value)">
-            <option value="amitabh">Mr. Bachchan</option>
-            <option value="lady">Sweet Lady</option>
-        </select></div>
+        <div class="row">VOICE ARTIST <select id="artist-sel" onchange="setCfg('art', this.value)"></select></div>
         <div class="row">LAYOUT & VOICE <button class="tog-btn" onclick="tog('isG')" id="l-btn">ENG</button></div>
         <div class="row">VOICE MASTER <button class="tog-btn" onclick="tog('s')" id="v-btn">ON</button></div>
         <div class="row">BEEP PROF <select id="b-sel" onchange="setCfg('bp', this.value)"></select></div>
         <div class="row">PIANO PROF <select id="p-sel" onchange="setCfg('pp', this.value)"></select></div>
         <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px; padding: 0 5px;">
-            <div style="font-weight:900; font-size:10px; color:#888;">LOGBOOK (LAST 10)</div>
+            <div style="font-weight:900; font-size:10px; color:#888;">LOGBOOK (MAX 10)</div>
             <button onclick="clearHist()" style="background:none; border:none; color:#ff4444; font-size:10px; font-weight:bold; cursor:pointer;">CLEAR HISTORY</button>
         </div>
         <div id="hist-scroll"></div>
@@ -95,7 +93,6 @@
     const gWords = {'+':'વત્તા','-':'ઓછા','*':'ગુણાકાર','/':'ભાગાકાર','%':'ટકા','=':'જવાબ','AC':'સાફ કરો','DEL':'કાઢી નાખો'};
     const eWords = {'+':'Plus','-':'Minus','*':'Multiply','/':'Divide','%':'Percent','=':'Result is','AC':'Clear','DEL':'Delete'};
 
-    // THEME & SOUND CONFIG (FORCED LOAD)
     let cfg = { 
         tIdx: parseInt(localStorage.getItem('v12_tIdx')) || 0, 
         isG: localStorage.getItem('v12_isG') === 'true',
@@ -139,79 +136,90 @@
         if(b && b.f > 0) genSound(b.f, b.t, b.d, b.g);
         if(p && pFreqs[v] && cfg.pp !== "p0") genSound(pFreqs[v], p.t, p.d, p.g);
 
-        if (v === 'AC') { expr = ""; liveAns = "0"; isRes = false; displayExpr = ""; speak(cfg.isG ? gWords['AC'] : eWords['AC']); }
-        else if (v === 'DEL') { expr = expr.slice(0, -1); isRes = false; calc(); }
-        else if (v === '=') { 
-            if(liveAns !== "Error") {
+        const ops = ['+','-','*','/'];
+
+        if (v === 'AC') { 
+            expr = ""; liveAns = "0"; isRes = false; displayExpr = ""; speak(cfg.isG ? gWords['AC'] : eWords['AC']); 
+        } else if (v === 'DEL') { 
+            if(isRes) { expr = ""; isRes = false; }
+            else expr = expr.slice(0, -1);
+            calc();
+        } else if (v === '=') { 
+            if(liveAns !== "Error" && expr !== "") {
                 displayExpr = expr + "=" + liveAns;
                 addLog(displayExpr);
                 speak((cfg.isG ? gWords['='] : eWords['=']) + " " + liveAns);
                 expr = liveAns; isRes = true;
             }
+        } else if (v === '%') {
+            if(isRes) isRes = false;
+            expr += v; calc(); speak(cfg.isG ? gWords['%'] : eWords['%']);
+        } else if (ops.includes(v)) {
+            if (expr === "" && v !== '-') return;
+            if (isRes) isRes = false;
+            if (ops.includes(expr.slice(-1))) expr = expr.slice(0, -1) + v;
+            else expr += v;
+            speak(cfg.isG ? gWords[v] : eWords[v]);
         } else {
-            if (isRes && !isNaN(v)) { expr = ""; isRes = false; }
-            else if (isRes && isNaN(v)) { isRes = false; }
-            expr += v;
-            displayExpr = expr;
-            calc();
-            if (isNaN(v) && v !== '.' && v !== '00') {
-                speak(cfg.isG ? gWords[v] : eWords[v]);
-            } else {
-                clearTimeout(speakTimer);
-                speakTimer = setTimeout(() => {
-                    let segments = expr.split(/[\+\-\*\/]/);
-                    speak(segments[segments.length-1]);
-                }, 400);
-            }
+            if (isRes) { expr = ""; isRes = false; }
+            expr += v; calc();
+            clearTimeout(speakTimer);
+            speakTimer = setTimeout(() => {
+                let segments = expr.split(/[\+\-\*\/%]/);
+                speak(segments[segments.length-1]);
+            }, 400);
         }
+        
+        if (!isRes) displayExpr = expr;
         updateUI();
     }
 
     function calc() {
         try {
-            let temp = expr.replace(/×/g,'*').replace(/÷/g,'/').replace(/−/g,'-');
-            temp = temp.replace(/(\d+(\.\d+)?)\s*([\+\-])\s*(\d+(\.\d+)?)%/g, (m, n1, d1, op, n2) => `${n1}${op}(${n1}*${n2}/100)`);
-            temp = temp.replace(/(\d+)%/g, "($1/100)");
-            let res = eval(temp.replace(/[\+\-\*\/]$/, ""));
+            if (expr === "") { liveAns = "0"; return; }
+            let s = expr.replace(/×/g,'*').replace(/÷/g,'/').replace(/−/g,'-');
+            s = s.replace(/(\d+(\.\d+)?)\s*([\+\-\*\/])\s*(\d+(\.\d+)?)%/g, (m, n1, d1, op, n2) => {
+                if(op === '+' || op === '-') return `${n1}${op}(${n1}*${n2}/100)`;
+                return `${n1}${op}(${n2}/100)`;
+            });
+            s = s.replace(/(\d+(\.\d+)?)%/g, "($1/100)");
+            let cleanExpr = s.replace(/[\+\-\*\/]$/, "");
+            let res = eval(cleanExpr);
             liveAns = (res !== undefined) ? Number(res.toFixed(8)).toString() : "0";
         } catch { liveAns = "Error"; }
     }
 
     function updateUI() {
         const conv = (s) => cfg.isG ? s.toString().replace(/[0-9]/g, x => gMap[x]) : s;
-        document.getElementById('layer-eq').innerText = conv(displayExpr);
+        const eqEl = document.getElementById('layer-eq');
+        eqEl.innerText = conv(displayExpr);
         document.getElementById('layer-ans').innerText = conv(isRes ? expr : liveAns);
+        
+        // Horizontal Scroll Fix
+        setTimeout(() => { eqEl.scrollLeft = eqEl.scrollWidth; }, 10);
+
         document.querySelectorAll('.key').forEach(k => {
             let v = k.dataset.val;
             if(!isNaN(v) || v === "00") k.innerText = cfg.isG ? gMap[v] : v;
         });
-        document.getElementById('layer-eq').scrollLeft = 9999;
     }
 
     function genSound(f, t, d, gVal) {
         let o = aCtx.createOscillator(), g = aCtx.createGain();
         o.type = t; o.frequency.value = f;
-        g.gain.setValueAtTime(cfg.vol * gVal || 0.5, aCtx.currentTime);
+        g.gain.setValueAtTime(0.5 * gVal, aCtx.currentTime);
         g.gain.exponentialRampToValueAtTime(0.001, aCtx.currentTime + d);
         o.connect(g); g.connect(aCtx.destination); o.start(); o.stop(aCtx.currentTime + d);
     }
 
     function addLog(item) {
         let h = JSON.parse(localStorage.getItem('v12_logs') || "[]");
-        h.unshift(item); 
-        if(h.length > 10) h.pop();
+        h.unshift(item); if(h.length > 10) h.pop();
         localStorage.setItem('v12_logs', JSON.stringify(h));
     }
 
-    function clearHist() {
-        localStorage.setItem('v12_logs', "[]");
-        renderHist();
-    }
-
-    function openGarage() {
-        document.getElementById('garage-overlay').classList.toggle('active');
-        renderHist();
-    }
+    function clearHist() { localStorage.setItem('v12_logs', "[]"); renderHist(); }
+    function openGarage() { document.getElementById('garage-overlay').classList.toggle('active'); renderHist(); }
 
     function renderHist() {
         const h = JSON.parse(localStorage.getItem('v12_logs') || "[]");
@@ -220,20 +228,13 @@
         `).join('') || "<div style='text-align:center; padding-top:20px; font-size:10px; color:#aaa;'>LOGBOOK EMPTY</div>";
     }
 
-    function setCfg(k, v) { 
-        cfg[k] = v; 
-        localStorage.setItem('v12_'+k, v); 
-    }
-
-    function tog(k) { 
-        cfg[k] = !cfg[k]; 
-        localStorage.setItem('v12_'+k, cfg[k]); 
-        updateMenu(); 
-    }
+    function setCfg(k, v) { cfg[k] = v; localStorage.setItem('v12_'+k, v); }
+    function tog(k) { cfg[k] = !cfg[k]; localStorage.setItem('v12_'+k, cfg[k]); updateMenu(); }
 
     function updateMenu() {
         document.getElementById('l-btn').innerText = cfg.isG ? "GUJARATI" : "ENGLISH";
         document.getElementById('v-btn').innerText = cfg.s ? "ON" : "OFF";
+        document.getElementById('artist-sel').innerHTML = `<option value="amitabh">Mr. Bachchan</option><option value="lady">Sweet Lady</option>`;
         document.getElementById('artist-sel').value = cfg.art;
         document.getElementById('b-sel').innerHTML = beeps.map((b,i)=>`<option value="b${i}">${b.n}</option>`).join('');
         document.getElementById('p-sel').innerHTML = pianos.map((p,i)=>`<option value="p${i}">${p.n}</option>`).join('');
@@ -242,12 +243,7 @@
         updateUI();
     }
 
-    function cycleTheme() { 
-        cfg.tIdx = (cfg.tIdx + 1) % 56; 
-        localStorage.setItem('v12_tIdx', cfg.tIdx); 
-        applyUI(); 
-    }
-
+    function cycleTheme() { cfg.tIdx = (cfg.tIdx + 1) % 56; localStorage.setItem('v12_tIdx', cfg.tIdx); applyUI(); }
     function applyUI() { document.body.className = `t-${cfg.tIdx}`; }
     
     function generateDynamicThemes() {
