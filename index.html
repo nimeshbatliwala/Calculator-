@@ -4,117 +4,159 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Jaguar V12 Platinum</title>
+    <title>Jaguar V12 Platinum Ultra</title>
     <style>
-        :root { --trans: 0.3s ease; }
+        :root { --radius: 12px; }
 
-        /* --- THEMES --- */
-        body.t-0 { --bg: #000; --panel: #111; --accent: #00e5ff; --text: #fff; --shadow: #000; --light: #222; }
-        body.t-1 { --bg: #0f0c00; --panel: #1a1600; --accent: #ffd700; --text: #fff; --shadow: #000; --light: #4d4108; }
-        body.t-2 { --bg: #1a1a1a; --panel: #222; --accent: #e0e0e0; --text: #fff; --shadow: #000; --light: #444; }
-        
-        /* HIGH DEPTH LIGHT THEMES */
-        body.t-3 { --bg: #e0e5ec; --panel: #e0e5ec; --accent: #007aff; --text: #444; --shadow: #a3b1c6; --light: #ffffff; }
-        body.t-4 { --bg: #fdfaf0; --panel: #fdfaf0; --accent: #d4af37; --text: #5d4037; --shadow: #e2d1b3; --light: #ffffff; }
-        body.t-5 { --bg: #ffffff; --panel: #ffffff; --accent: #ff4757; --text: #2f3542; --shadow: #d1d8e0; --light: #ffffff; }
-        
-        body.t-6 { --bg: #000; --panel: #0a0a0a; --accent: linear-gradient(45deg, #f00, #ff7f00, #ff0, #0f0, #00f, #4b0082, #8b00ff); --text: #fff; --shadow: #000; --light: #1a1a1a; }
-        body.t-7 { --bg: #050010; --panel: #120025; --accent: #00ffcc; --text: #fff; --shadow: #000; --light: #2a0050; }
+        /* --- 26+ TOTALLY UNIQUE THEMES WITH HIGH CONTRAST --- */
+        body.t-0 { --bg: #050a10; --panel: #0f172a; --key: #1e293b; --accent: #38bdf8; --text: #f8fafc; --shadow: #000; --light: #334155; --disp: #020617; }
+        body.t-1 { --bg: #f1f5f9; --panel: #ffffff; --key: #e2e8f0; --accent: #2563eb; --text: #0f172a; --shadow: #94a3b8; --light: #cbd5e1; --disp: #1e293b; }
+        body.t-2 { --bg: linear-gradient(135deg, #f43f5e, #fb7185); --panel: #fff; --key: #fff1f2; --accent: #e11d48; --text: #881337; --shadow: #fda4af; --light: #fff; --disp: #4c0519; }
+        body.t-3 { --bg: #2e1065; --panel: #4c1d95; --key: #5b21b6; --accent: #a78bfa; --text: #fff; --shadow: #000; --light: #6d28d9; --disp: #1e1b4b; }
+        body.t-4 { --bg: #451a03; --panel: #78350f; --key: #92400e; --accent: #facc15; --text: #fff; --shadow: #000; --light: #b45309; --disp: #000000; }
+        body.t-5 { --bg: #022c22; --panel: #064e3b; --key: #065f46; --accent: #4ade80; --text: #fff; --shadow: #000; --light: #0f766e; --disp: #000000; }
+        body.t-6 { --bg: #1e3a8a; --panel: #1e40af; --key: #1d4ed8; --accent: #60a5fa; --text: #fff; --shadow: #000; --light: #2563eb; --disp: #172554; }
+        body.t-7 { --bg: #000; --panel: #111; --key: #222; --accent: #00ffcc; --text: #fff; --shadow: #000; --light: #333; --disp: #0a0a0a; }
+        body.t-8 { --bg: #faf5ff; --panel: #fff; --key: #f3e8ff; --accent: #7e22ce; --text: #3b0764; --shadow: #d8b4fe; --light: #e9d5ff; --disp: #2e1065; }
+        body.t-9 { --bg: #fff7ed; --panel: #fff; --key: #ffedd5; --accent: #ea580c; --text: #7c2d12; --shadow: #fed7aa; --light: #fdba74; --disp: #431407; }
+
+        /* NEW THEMES 11-19 (Gradients & Mix) */
+        body.t-11 { --bg: linear-gradient(45deg, #00dbde, #fc00ff); --panel: rgba(0,0,0,0.6); --key: rgba(255,255,255,0.1); --accent: #fff; --text: #fff; --shadow: #000; --light: #444; --disp: #000; }
+        body.t-12 { --bg: linear-gradient(to right, #11998e, #38ef7d); --panel: #002d26; --key: #004d40; --accent: #ccff00; --text: #fff; --shadow: #000; --light: #00695c; --disp: #001a14; }
+        body.t-13 { --bg: #000000; --panel: #1a1a1a; --key: #333; --accent: #ff0000; --text: #ff4d4d; --shadow: #ff0000; --light: #444; --disp: #000; }
+        body.t-14 { --bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%); --panel: #ffffff; --key: #f0f0f0; --accent: #667eea; --text: #4a148c; --shadow: #764ba2; --light: #e0e0e0; --disp: #2a0a4d; }
+        body.t-15 { --bg: #ffecd2; --panel: #fcb69f; --key: #ff9a9e; --accent: #fff; --text: #fff; --shadow: #333; --light: #fbc2eb; --disp: #4a1111; }
+        body.t-16 { --bg: #090909; --panel: #121212; --key: #1f1f1f; --accent: #bb86fc; --text: #e0e0e0; --shadow: #000; --light: #333; --disp: #121212; }
+        body.t-17 { --bg: linear-gradient(to right, #ff5f6d, #ffc371); --panel: #fff; --key: #fff5f0; --accent: #ff5f6d; --text: #7c2d12; --shadow: #ffc371; --light: #ffedd5; --disp: #3e1205; }
+        body.t-18 { --bg: #232526; --panel: #414345; --key: #333; --accent: #00e5ff; --text: #fff; --shadow: #000; --light: #555; --disp: #1a1a1a; }
+        body.t-19 { --bg: #134e4a; --panel: #0f766e; --key: #115e59; --accent: #5eead4; --text: #fff; --shadow: #042f2e; --light: #14b8a6; --disp: #042f2e; }
+
+        /* MULTI-COLOR KEYS - THEME 10 */
+        .t-10 .key:nth-child(4n+1) { background: #ef4444 !important; color: #fff !important; }
+        .t-10 .key:nth-child(4n+2) { background: #22c55e !important; color: #fff !important; }
+        .t-10 .key:nth-child(4n+3) { background: #3b82f6 !important; color: #fff !important; }
+        .t-10 .key:nth-child(4n+4) { background: #eab308 !important; color: #000 !important; }
+        body.t-10 { --disp: #1e293b; --accent: #fff; }
+
+        /* MULTI-COLOR KEYS - THEME 20 (Pastel Mix) */
+        .t-20 .key:nth-child(5n+1) { background: #ffcfd2 !important; color: #000 !important; }
+        .t-20 .key:nth-child(5n+2) { background: #f1c0e8 !important; color: #000 !important; }
+        .t-20 .key:nth-child(5n+3) { background: #cfbaf0 !important; color: #000 !important; }
+        .t-20 .key:nth-child(5n+4) { background: #a3c4f3 !important; color: #000 !important; }
+        .t-20 .key:nth-child(5n+5) { background: #90dbf4 !important; color: #000 !important; }
+        body.t-20 { --disp: #001219; --accent: #00e5ff; }
+
+        /* Neon Cyberpunk */
+        body.t-21 { --bg: #000; --panel: #000; --key: #111; --accent: #ff00ff; --text: #00ffff; --light: #222; --disp: #000; }
+        /* Soft Sage */
+        body.t-22 { --bg: #f0fdf4; --panel: #fff; --key: #dcfce7; --accent: #15803d; --text: #14532d; --light: #bbf7d0; --disp: #064e3b; }
+        /* Sky Blue Gradient */
+        body.t-23 { --bg: linear-gradient(to bottom, #0ea5e9, #38bdf8); --panel: #fff; --key: #e0f2fe; --accent: #0369a1; --text: #0c4a6e; --disp: #082f49; }
+        /* Lava Red */
+        body.t-24 { --bg: #450a0a; --panel: #7f1d1d; --key: #991b1b; --accent: #f87171; --text: #fff; --disp: #000; }
+        /* Concrete Gray */
+        body.t-25 { --bg: #1f2937; --panel: #374151; --key: #4b5563; --accent: #d1d5db; --text: #fff; --disp: #111827; }
+
+        .key.k-eq { background: var(--accent) !important; color: #fff !important; border: 2px solid rgba(255,255,255,0.4) !important; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; user-select: none; }
-        html, body { width: 100vw; height: 100dvh; overflow: hidden; background: #000; font-family: 'Arial Black', sans-serif; transition: var(--trans); position: fixed; top: 0; left: 0; }
+        html, body { width: 100vw; height: 100vh; overflow: hidden; background: var(--bg); font-family: -apple-system, sans-serif; position: fixed; transition: 0.5s; }
         
-        #splash { position: fixed; inset: 0; z-index: 9999; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        #main-ui { width: 100vw; height: 100dvh; display: none; flex-direction: column; background: var(--bg); }
-        #tablet { width: 100vw; height: 100%; display: flex; flex-direction: column; padding: 15px; padding-top: env(safe-area-inset-top); }
-
-        .shape-capsule .key { border-radius: 100px; height: 85%; width: 75%; margin: auto; aspect-ratio: 0.65 / 1; }
-        .shape-round .key { border-radius: 50%; height: auto; width: 85%; margin: auto; aspect-ratio: 1 / 1; }
-
-        .top-bar { display: flex; justify-content: space-between; align-items: center; height: 50px; }
-        #theme-pulse { width: 55px; height: 16px; background: var(--accent); border-radius: 10px; box-shadow: 0 0 15px var(--accent); border: 2px solid #fff; }
+        #main-ui { width: 100vw; height: 100vh; display: none; align-items: center; justify-content: center; padding: 15px; }
+        #tablet { width: 100%; height: 100%; max-width: 440px; background: var(--panel); border-radius: 28px; display: flex; flex-direction: column; padding: 15px; box-shadow: 0 25px 60px var(--shadow); border: 1px solid var(--light); }
         
-        #display { flex: 1.2; display: flex; flex-direction: column; justify-content: flex-end; text-align: right; padding: 10px; }
-        #layer-eq { font-size: 1.4rem; color: var(--text); opacity: 0.6; min-height: 1.5em; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
-        #layer-ans { font-size: clamp(3rem, 15vw, 6rem); color: var(--accent); font-weight: 900; line-height: 1; }
+        .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding: 0 8px; }
+        #garage-trigger { color: var(--accent); font-size: 10px; letter-spacing: 2px; cursor: pointer; font-weight: 800; text-transform: uppercase; }
 
-        body.t-6 #layer-ans { background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
-        .keypad { flex: 4.8; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding-bottom: 10px; }
-        .key { 
-            background: var(--panel); border: none; color: var(--text); font-size: 1.8rem; font-weight: 900; 
-            display: flex; align-items: center; justify-content: center; 
-            box-shadow: 6px 6px 12px var(--shadow), -4px -4px 10px var(--light); 
-            transition: 0.1s; 
+        #display { 
+            width: 100%; height: 130px; margin-bottom: 15px; background: var(--disp); border-radius: 20px; padding: 15px 22px; 
+            display: flex; flex-direction: column; justify-content: center; align-items: flex-end; cursor: pointer; 
+            border: 2px solid rgba(255,255,255,0.05); box-shadow: inset 0 4px 20px rgba(0,0,0,0.5); overflow: hidden; transition: 0.3s;
         }
-        .key.pressed { transform: scale(0.92); box-shadow: inset 4px 4px 8px var(--shadow), inset -4px -4px 8px var(--light); }
-        .k-eq { background: var(--accent) !important; color: #fff !important; }
+        /* UPDATED FONT FOR LAYER 1 */
+        #layer-eq { font-size: 1.25rem; color: #fff; opacity: 0.85; width: 100%; overflow-x: auto; white-space: nowrap; text-align: right; margin-bottom: 4px; font-family: 'Courier New', monospace; font-weight: bold; }
+        #layer-ans { font-size: 2.3rem; color: var(--accent); font-weight: 700; width: 100%; text-align: right; overflow-x: auto; white-space: nowrap; }
 
-        /* GARAGE */
-        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); visibility: hidden; opacity: 0; z-index: 5000; transition: 0.3s; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
+        .keypad { flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        .key { background: var(--key); border: 1px solid var(--light); border-radius: 14px; font-size: 1.4rem; color: var(--text); display: flex; align-items: center; justify-content: center; font-weight: 600; transition: 0.1s; cursor: pointer; }
+        .key.pressed { transform: scale(0.9); opacity: 0.6; filter: brightness(1.3); }
+
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); visibility: hidden; opacity: 0; z-index: 5000; transition: 0.3s; display: flex; align-items: center; justify-content: center; }
         .overlay.active { visibility: visible; opacity: 1; }
-        .modal { width: 94%; height: 90vh; background: #fff; border-radius: 35px; padding: 25px; color: #000; display: flex; flex-direction: column; }
-        .row { background: #f0f0f0; padding: 12px 15px; border-radius: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 13px; }
-        #hist-scroll { flex: 1; background: #eee; border-radius: 20px; padding: 12px; margin-top: 5px; overflow-y: auto; }
-        .tog-btn, select { background: #fff; border: 1px solid #ccc; padding: 8px; border-radius: 8px; font-weight: 900; width: 110px; font-size: 11px; }
-        .exit-btn { width: 100%; margin-top: 15px; background: #000; color: #fff; height: 50px; border-radius: 20px; font-weight: 900; border: none; }
+        .modal { width: 92%; max-height: 85vh; background: linear-gradient(135deg, #1a1c2c, #4a1942); border-radius: 25px; padding: 25px; color: #fff; display: flex; flex-direction: column; border: 2px solid #00e5ff; }
+        .modal h2 { text-align: center; font-size: 18px; letter-spacing: 3px; margin-bottom: 15px; color: #00e5ff; }
+        .row { background: rgba(255,255,255,0.1); padding: 12px; border-radius: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 13px; }
+        
+        #hist-scroll { flex: 1; overflow-y: auto; background: rgba(0,0,0,0.3); border-radius: 12px; padding: 10px; margin-top: 10px; border: 1px solid rgba(255,255,255,0.1); }
+        .hist-item { display: flex; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); color: #00e5ff; font-family: monospace; font-size: 14px; }
+        
+        #splash { position: fixed; inset: 0; z-index: 20000; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        select, .tog-btn { background: #fff; border: none; padding: 8px; border-radius: 8px; font-weight: bold; width: 130px; color: #000; }
     </style>
 </head>
 <body class="t-0">
 
 <div id="splash">
-    <h1 style="color:#00e5ff; letter-spacing:8px; font-size: 2.8rem; margin-bottom:40px;">JAGUAR V12</h1>
-    <button onclick="ignite()" style="padding: 22px 80px; border: 3px solid #00e5ff; background:transparent; color:#00e5ff; font-weight:900; border-radius:50px; cursor:pointer;">IGNITION</button>
+    <div style="font-size: 32px; letter-spacing: 10px; color: #00e5ff; margin-bottom: 40px; font-weight: 900;">JAGUAR V12</div>
+    <button id="ignition-btn" style="padding: 20px 80px; border-radius: 10px; border: 3px solid #00e5ff; background: transparent; color: #00e5ff; font-weight: 900; font-size: 20px; cursor: pointer;">IGNITION</button>
 </div>
 
 <div id="main-ui">
     <div id="tablet">
         <div class="top-bar">
-            <div onclick="openGarage()" style="color:var(--text); opacity:0.5; font-size:10px; font-weight:bold; cursor:pointer;">SYSTEM V12</div>
-            <div style="display:flex; align-items:center; gap:15px;">
-                <span onclick="moveTheme(-1)" style="color:var(--text); font-size:25px; font-weight:bold;">&#10094;</span>
-                <div id="theme-pulse"></div>
-                <span onclick="moveTheme(1)" style="color:var(--text); font-size:25px; font-weight:bold;">&#10095;</span>
-            </div>
+            <div id="garage-trigger" onclick="openGarage()">JAGUAR GARAGE CORE</div>
+            <div style="color:var(--accent); font-size:9px; opacity:0.6;">THEME: TAP DISPLAY</div>
         </div>
-        <div id="display">
+        <div id="display" onclick="handleDisplayTap(event)">
             <div id="layer-eq"></div>
             <div id="layer-ans">0</div>
         </div>
         <div class="keypad" id="pad">
-            <button class="key" data-val="AC">AC</button><button class="key" data-val="DEL">⌫</button><button class="key" data-val="%">%</button><button class="key" data-val="/">÷</button>
-            <button class="key" data-val="7">7</button><button class="key" data-val="8">8</button><button class="key" data-val="9">9</button><button class="key" data-val="*">×</button>
-            <button class="key" data-val="4">4</button><button class="key" data-val="5">5</button><button class="key" data-val="6">6</button><button class="key" data-val="-">−</button>
-            <button class="key" data-val="1">1</button><button class="key" data-val="2">2</button><button class="key" data-val="3">3</button><button class="key" data-val="+">+</button>
-            <button class="key" data-val="0">0</button><button class="key" data-val="00">00</button><button class="key" data-val=".">.</button><button class="key k-eq" data-val="=">=</button>
+            <button class="key" data-val="AC">AC</button>
+            <button class="key" data-val="DEL">DEL</button>
+            <button class="key" data-val="%">%</button>
+            <button class="key" data-val="/">÷</button>
+            <button class="key" data-val="7">7</button><button class="key" data-val="8">8</button><button class="key" data-val="9">9</button>
+            <button class="key" data-val="*">×</button>
+            <button class="key" data-val="4">4</button><button class="key" data-val="5">5</button><button class="key" data-val="6">6</button>
+            <button class="key" data-val="-">−</button>
+            <button class="key" data-val="1">1</button><button class="key" data-val="2">2</button><button class="key" data-val="3">3</button>
+            <button class="key" data-val="+">+</button>
+            <button class="key" data-val="0">0</button><button class="key" data-val="00">00</button><button class="key" data-val=".">.</button>
+            <button class="key k-eq" data-val="=">=</button>
         </div>
     </div>
 </div>
 
-<div id="garage" class="overlay" onclick="openGarage()">
+<div id="garage-overlay" class="overlay" onclick="openGarage()">
     <div class="modal" onclick="event.stopPropagation()">
-        <h2>GARAGE SETTINGS</h2>
-        <div class="settings-area">
-            <div class="row">KEY STYLE <button class="tog-btn" onclick="togStyle()" id="style-btn">CAPSULE</button></div>
-            <div class="row">MASTER VOICE <button class="tog-btn" onclick="tog('s')" id="v-btn">ON</button></div>
-            <div class="row">VOICE ARTIST <select id="art-sel" onchange="setCfg('art', this.value)"><option value="amitabh">Bachchan</option><option value="lady">Lady</option></select></div>
-            <div class="row">BEEP <select id="b-sel" onchange="setCfg('bp', this.value)"></select></div>
-            <div class="row">PIANO <select id="p-sel" onchange="setCfg('pp', this.value)"></select></div>
-            <div class="row">LANGUAGE <button class="tog-btn" onclick="tog('isG')" id="l-btn">ENG</button></div>
+        <h2>SYSTEM GARAGE</h2>
+        <div class="row" style="background: #3b82f6;">FULLSCREEN <button class="tog-btn" onclick="forceFS()">ACTIVATE</button></div>
+        <div class="row" style="background: #a855f7;">VOICE ARTIST <select id="artist-sel" onchange="setCfg('art', this.value)">
+            <option value="amitabh">Amitabh B.</option>
+            <option value="lady">Lady Voice</option>
+        </select></div>
+        <div class="row" style="background: #ec4899;">LANGUAGE <button class="tog-btn" onclick="tog('isG')" id="l-btn">ENG</button></div>
+        <div class="row" style="background: #10b981;">SOUND MASTER <button class="tog-btn" onclick="tog('s')" id="v-btn">ON</button></div>
+        <div class="row" style="background: #f59e0b;">BEEP PROF <select id="b-sel" onchange="setCfg('bp', this.value)"></select></div>
+        <div class="row" style="background: #6366f1;">PIANO PROF <select id="p-sel" onchange="setCfg('pp', this.value)"></select></div>
+        
+        <div style="display:flex; justify-content:space-between; margin-top:15px;">
+            <div style="font-weight:900; font-size:11px; color:#00e5ff;">HISTORY (MAX 10)</div>
+            <button onclick="clearHist()" style="border:none; color:#ff4444; font-size:11px; background:none; font-weight:900;">CLEAR</button>
         </div>
         <div id="hist-scroll"></div>
-        <button class="exit-btn" onclick="openGarage()">CLOSE</button>
+        <button class="tog-btn" style="width:100%; margin-top:15px; background:#fff; color:#000; height:45px;" onclick="openGarage()">EXIT GARAGE</button>
     </div>
 </div>
 
 <script>
-    let expr = "", liveAns = "0", isRes = false;
+    let expr = "", liveAns = "0", isRes = false, lastFullEq = "";
     const aCtx = new (window.AudioContext || window.webkitAudioContext)();
-    
+    const gMap = {'0':'૦','1':'૧','2':'૨','3':'૩','4':'૪','5':'૫','6':'૬','7':'૭','8':'૮','9':'૯','00':'૦૦','/':'÷','*':'×','-':'−'};
+
     let cfg = { 
-        tIdx: parseInt(localStorage.getItem('v12_tIdx')) || 0,
-        isRound: localStorage.getItem('v12_isRound') === 'true',
+        tIdx: parseInt(localStorage.getItem('v12_tIdx')) || 0, 
         isG: localStorage.getItem('v12_isG') === 'true',
         art: localStorage.getItem('v12_art') || "amitabh",
         bp: localStorage.getItem('v12_bp') || "b1",
@@ -122,87 +164,103 @@
         s: localStorage.getItem('v12_s') !== 'false'
     };
 
-    const gMap = {'0':'૦','1':'૧','2':'૨','3':'૩','4':'૪','5':'૫','6':'૬','7':'૭','8':'૮','9':'૯','00':'૦૦'};
-    const beeps = [{n:"Mute",f:0},{n:"Soft Tap",f:800,t:'sine',d:0.08,g:0.3},{n:"Silk",f:1200,t:'sine',d:0.04,g:0.2},{n:"Digital",f:2000,t:'square',d:0.02,g:0.1},{n:"Pulse",f:150,t:'triangle',d:0.12,g:0.4},{n:"Bubble",f:600,t:'sine',d:0.15,g:0.4},{n:"Glass",f:2800,t:'sine',d:0.08,g:0.3},{n:"Eco",f:450,t:'sine',d:0.06,g:0.3},{n:"Heavy",f:100,t:'square',d:0.2,g:0.2},{n:"Sport",f:1100,t:'sawtooth',d:0.04,g:0.1}];
-    const pianos = [{n:"Mute",f:0},{n:"Grand",t:'triangle',d:1.5,g:0.7},{n:"Studio",t:'sine',d:0.6,g:0.9},{n:"Mellow",t:'sine',d:1.2,g:0.5},{n:"Electric",t:'square',d:1.0,g:0.1},{n:"Toy",t:'sine',d:0.3,g:0.8},{n:"Bright",t:'sine',d:0.5,g:1.0},{n:"Dark",t:'triangle',d:2.5,g:0.3},{n:"Dream",t:'sine',d:3.0,g:0.2},{n:"Ambient",t:'sine',d:2.2,g:0.3},{n:"Honky",t:'sawtooth',d:0.7,g:0.2},{n:"Space",t:'sine',d:2.8,g:0.4},{n:"Royal",t:'triangle',d:1.8,g:0.5},{n:"Jazz",t:'sawtooth',d:0.9,g:0.1},{n:"Sky",t:'sine',d:2.2,g:0.3}];
+    const beeps = [{n:"Mute",f:0},{n:"Soft Tap",f:800,t:'sine',d:0.08,g:0.3},{n:"Silk Touch",f:1200,t:'sine',d:0.04,g:0.2},{n:"Digital Click",f:2000,t:'square',d:0.02,g:0.1},{n:"Low Pulse",f:150,t:'triangle',d:0.12,g:0.4},{n:"Bubble Pop",f:600,t:'sine',d:0.15,g:0.4},{n:"Feather",f:1800,t:'sine',d:0.06,g:0.2},{n:"Glass Ting",f:2800,t:'sine',d:0.08,g:0.3},{n:"Sport Beep",f:1100,t:'sawtooth',d:0.04,g:0.1},{n:"Eco Click",f:450,t:'sine',d:0.06,g:0.3}];
+    const pianos = [{n:"Mute Piano",f:0},{n:"Grand Piano",t:'triangle',d:1.5,g:0.7},{n:"Studio One",t:'sine',d:0.6,g:0.9},{n:"Mellow Gold",t:'sine',d:1.2,g:0.5},{n:"Honky Tonk",t:'sawtooth',d:0.7,g:0.2},{n:"Electric Sky",t:'square',d:1.0,g:0.1},{n:"Classic 88",t:'triangle',d:1.4,g:0.4},{n:"Toy Box",t:'sine',d:0.3,g:0.8},{n:"Bright Key",t:'sine',d:0.5,g:1.0},{n:"Dark Night",t:'triangle',d:2.5,g:0.3},{n:"Dream State",t:'sine',d:3.0,g:0.2},{n:"Space Echo",t:'sine',d:2.8,g:0.4},{n:"Jazz Club",t:'sawtooth',d:0.9,g:0.1},{n:"Royal Felt",t:'triangle',d:1.8,g:0.5},{n:"Ambient Sky",t:'sine',d:2.2,g:0.3}];
     const pFreqs = {'AC':261,'DEL':293,'%':329,'/':349,'7':392,'8':440,'9':493,'*':523,'4':587,'5':659,'6':698,'-':783,'1':880,'2':987,'3':1046,'+':1174,'0':1318,'.':1396,'=':1567,'00':1000};
 
-    function ignite() {
-        if (aCtx.state === 'suspended') aCtx.resume();
-        const doc = document.documentElement;
-        if (doc.requestFullscreen) doc.requestFullscreen();
-        document.getElementById('splash').style.display = 'none';
-        document.getElementById('main-ui').style.display = 'flex';
-        initThemes(); updateMenu(); updateUI();
+    function forceFS() {
+        const de = document.documentElement;
+        if (de.requestFullscreen) de.requestFullscreen();
+        else if (de.webkitRequestFullscreen) de.webkitRequestFullscreen();
     }
 
-    // --- RE-RESTORED ACCURATE MATH ENGINE ---
-    function handleInput(v) {
-        const b = beeps[parseInt(cfg.bp.slice(1)) || 0];
-        const p = pianos[parseInt(cfg.pp.slice(1)) || 0];
-        if(b && b.f > 0) genSound(b.f, b.t, b.d, b.g);
-        if(p && pFreqs[v] && cfg.pp !== "p0") genSound(pFreqs[v], p.t, p.d, p.g);
+    document.getElementById('ignition-btn').onclick = () => {
+        if (aCtx.state === 'suspended') aCtx.resume();
+        forceFS();
+        document.getElementById('splash').style.display='none'; 
+        document.getElementById('main-ui').style.display='flex';
+        updateMenu(); applyUI();
+    };
 
-        if (v === 'AC') { expr = ""; liveAns = "0"; isRes = false; speak('Clear'); }
-        else if (v === 'DEL') { if(isRes) { expr = ""; isRes = false; } else expr = expr.slice(0, -1); calc(); }
-        else if (v === '=') { 
-            if(expr) { 
-                let eqStr = expr + "=" + liveAns; 
-                addLog(eqStr); speak(liveAns); 
-                expr = eqStr; isRes = true; 
-            } 
-        } else {
-            // Operator replacement logic (200+*) -> (200*)
-            const ops = "+-*/%";
-            if (ops.includes(v) && ops.includes(expr.slice(-1))) {
-                expr = expr.slice(0, -1);
+    function handleDisplayTap(e) {
+        const rect = e.currentTarget.getBoundingClientRect();
+        cfg.tIdx = (e.clientX - rect.left > rect.width / 2) ? (cfg.tIdx + 1) % 26 : (cfg.tIdx - 1 + 26) % 26;
+        localStorage.setItem('v12_tIdx', cfg.tIdx); applyUI();
+    }
+
+    function speak(text) {
+        if(!cfg.s) return;
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = cfg.isG ? 'gu-IN' : 'en-IN';
+        u.pitch = cfg.isG ? 1.0 : (cfg.art === 'amitabh' ? 0.4 : 1.1);
+        window.speechSynthesis.speak(u);
+    }
+
+    function handleInput(v) {
+        const b = beeps[parseInt(cfg.bp.slice(1))] || beeps[0];
+        const p = pianos[parseInt(cfg.pp.slice(1))] || pianos[0];
+        if(b.f > 0) genSound(b.f, b.t, b.d, b.g);
+        if(pFreqs[v] && cfg.pp !== "p0") genSound(pFreqs[v], p.t, p.d, p.g);
+
+        const ops = ['+','-','*','/','%'];
+        
+        if (v === 'AC') { expr = ""; liveAns = "0"; isRes = false; lastFullEq = ""; speak(cfg.isG ? "સાફ કરો" : "Clear"); }
+        else if (v === 'DEL') { if(isRes) { expr = ""; isRes = false; } else { expr = expr.slice(0, -1); } calc(); }
+        else if (v === '=') {
+            if(liveAns !== "Error" && expr !== "") {
+                lastFullEq = expr + "=" + liveAns;
+                addLog(lastFullEq);
+                speak(cfg.isG ? `javab che ${liveAns}` : `Result is ${liveAns}`);
+                expr = liveAns; isRes = true;
             }
-            if (isRes) { expr = liveAns; isRes = false; }
-            expr += v; calc();
+        } else {
+            if (isRes) { if(!isNaN(v) || v === '00' || v === '.') expr = ""; isRes = false; }
+            if (ops.includes(v) && ops.includes(expr.slice(-1))) {
+                expr = expr.slice(0, -1) + v;
+            } else {
+                expr += v;
+            }
+            calc();
         }
         updateUI();
     }
 
     function calc() {
+        if(expr === "") { liveAns = "0"; return; }
         try {
-            let s = expr.replace(/×/g,'*').replace(/÷/g,'/').replace(/−/g,'-');
-            s = s.replace(/(\d+(\.\d+)?)\s*([\+\-\*\/])\s*(\d+(\.\d+)?)%/g, (m, n1, d1, op, n2) => {
-                if(op === '+' || op === '-') return `${n1}${op}(${n1}*${n2}/100)`;
-                return `${n1}${op}(${n2}/100)`;
-            });
-            s = s.replace(/(\d+(\.\d+)?)%/g, "($1/100)");
-            let res = eval(s.replace(/[\+\-\*\/]$/, ""));
-            liveAns = (res !== undefined) ? Number(res.toFixed(8)).toString() : "0";
-        } catch { liveAns = "0"; }
+            let temp = expr.replace(/×/g,'*').replace(/÷/g,'/').replace(/−/g,'-');
+            const pcRegex = /^(\d+\.?\d*)([\+\-\*\/])(\d+\.?\d*)%$/;
+            if (pcRegex.test(temp)) {
+                const match = temp.match(pcRegex);
+                let v1 = parseFloat(match[1]), op = match[2], v2 = parseFloat(match[3]);
+                if (op === '+') liveAns = (v1 + (v1 * v2 / 100)).toString();
+                else if (op === '-') liveAns = (v1 - (v1 * v2 / 100)).toString();
+                else if (op === '*') liveAns = (v1 * v2 / 100).toString();
+                else if (op === '/') liveAns = (v1 / (v2 / 100)).toString();
+                return;
+            }
+            let lastChar = temp.slice(-1);
+            if (['+','-','*','/','%'].includes(lastChar)) temp = temp.slice(0,-1);
+            let res = eval(temp);
+            liveAns = (res !== undefined) ? Number(res.toFixed(10)).toString() : "0";
+        } catch { liveAns = "Error"; }
     }
 
     function updateUI() {
-        const conv = (s) => cfg.isG ? s.toString().replace(/[0-9]/g, x => gMap[x]) : s;
-        document.querySelectorAll('.key').forEach(k => { 
-            if(!isNaN(k.dataset.val) || k.dataset.val === "00") k.innerText = cfg.isG ? gMap[k.dataset.val] : k.dataset.val; 
+        const conv = (s) => cfg.isG ? s.toString().split('').map(x => gMap[x] || x).join('') : s;
+        const eqDisp = document.getElementById('layer-eq');
+        const ansDisp = document.getElementById('layer-ans');
+        
+        document.querySelectorAll('.key').forEach(k => {
+            const val = k.dataset.val;
+            k.innerText = cfg.isG ? (gMap[val] || val) : val;
         });
-        document.getElementById('layer-eq').innerText = conv(expr);
-        document.getElementById('layer-ans').innerText = conv(isRes ? expr.split('=')[1] : liveAns);
-        document.getElementById('tablet').className = cfg.isRound ? 'shape-round' : 'shape-capsule';
-        document.body.className = `t-${cfg.tIdx}`;
-        document.getElementById('layer-eq').scrollLeft = 9999;
-    }
 
-    function moveTheme(dir) { cfg.tIdx = (cfg.tIdx + dir + 65) % 65; save(); updateUI(); }
-    function togStyle() { cfg.isRound = !cfg.isRound; save(); updateUI(); updateMenu(); }
-    function setCfg(k, v) { cfg[k] = v; save(); updateUI(); }
-    function tog(k) { cfg[k] = !cfg[k]; save(); updateMenu(); }
-    function save() { for(let k in cfg) localStorage.setItem('v12_'+k, cfg[k]); }
-
-    function updateMenu() {
-        document.getElementById('style-btn').innerText = cfg.isRound ? "ROUND" : "CAPSULE";
-        document.getElementById('l-btn').innerText = cfg.isG ? "GUJARATI" : "ENGLISH";
-        document.getElementById('v-btn').innerText = cfg.s ? "ON" : "OFF";
-        document.getElementById('b-sel').innerHTML = beeps.map((b,i)=>`<option value="b${i}">${b.n}</option>`).join('');
-        document.getElementById('p-sel').innerHTML = pianos.map((p,i)=>`<option value="p${i}">${p.n}</option>`).join('');
-        document.getElementById('b-sel').value = cfg.bp; document.getElementById('p-sel').value = cfg.pp;
-        document.getElementById('art-sel').value = cfg.art;
-        updateUI();
+        if(isRes) { eqDisp.innerText = conv(lastFullEq); ansDisp.innerText = conv(expr); } 
+        else { eqDisp.innerText = conv(expr); ansDisp.innerText = conv(liveAns); }
+        eqDisp.scrollLeft = eqDisp.scrollWidth;
+        ansDisp.scrollLeft = ansDisp.scrollWidth;
     }
 
     function genSound(f, t, d, gVal) {
@@ -213,30 +271,37 @@
         o.connect(g); g.connect(aCtx.destination); o.start(); o.stop(aCtx.currentTime + d);
     }
 
-    function speak(t) {
-        if(!cfg.s) return; window.speechSynthesis.cancel();
-        let u = new SpeechSynthesisUtterance(t); u.lang = cfg.isG ? 'gu-IN' : 'en-IN';
-        u.pitch = (cfg.art === 'amitabh') ? 0.4 : 1.1; window.speechSynthesis.speak(u);
+    function addLog(item) {
+        let h = JSON.parse(localStorage.getItem('v12_logs') || "[]");
+        h.unshift(item); if(h.length > 10) h.pop();
+        localStorage.setItem('v12_logs', JSON.stringify(h));
     }
-
-    function openGarage() { document.getElementById('garage').classList.toggle('active'); renderHist(); }
-    function addLog(i) { let h = JSON.parse(localStorage.getItem('v12_logs') || "[]"); h.unshift(i); if(h.length > 10) h.pop(); localStorage.setItem('v12_logs', JSON.stringify(h)); }
+    function clearHist() { localStorage.setItem('v12_logs', "[]"); renderHist(); }
+    function openGarage() { document.getElementById('garage-overlay').classList.toggle('active'); renderHist(); }
     function renderHist() {
         const h = JSON.parse(localStorage.getItem('v12_logs') || "[]");
-        document.getElementById('hist-scroll').innerHTML = h.map((eq, idx) => `<div style="padding:12px; border-bottom:1px solid #ddd; font-weight:bold;">${idx + 1}. ${eq}</div>`).join('') || "<div style='text-align:center; padding:30px; color:#999;'>LOG EMPTY</div>";
+        document.getElementById('hist-scroll').innerHTML = h.map((i, idx) => `<div class="hist-item"><span style="color:#888;margin-right:10px;">${idx + 1}.</span><span>${i}</span></div>`).join('') || "EMPTY";
     }
-
-    function initThemes() {
-        let style = document.createElement('style'); let css = '';
-        for(let i=8; i<65; i++) {
-            let h = (i * 137.5) % 360; 
-            css += `body.t-${i} { --bg: hsl(${h}, 50%, 8%); --panel: hsl(${h}, 30%, 15%); --accent: hsl(${h}, 100%, 60%); --text: #fff; --shadow: #000; --light: hsl(${h}, 30%, 22%); }\n`;
-        }
-        style.innerHTML = css; document.head.appendChild(style);
+    function setCfg(k, v) { cfg[k] = v; localStorage.setItem('v12_'+k, v); }
+    function tog(k) { cfg[k] = !cfg[k]; localStorage.setItem('v12_'+k, cfg[k]); updateMenu(); }
+    function updateMenu() {
+        document.getElementById('l-btn').innerText = cfg.isG ? "GUJARATI" : "ENGLISH";
+        document.getElementById('v-btn').innerText = cfg.s ? "ON" : "OFF";
+        document.getElementById('artist-sel').value = cfg.art;
+        document.getElementById('b-sel').innerHTML = beeps.map((b,i)=>`<option value="b${i}">${b.n}</option>`).join('');
+        document.getElementById('p-sel').innerHTML = pianos.map((p,i)=>`<option value="p${i}">${p.n}</option>`).join('');
+        document.getElementById('b-sel').value = cfg.bp; document.getElementById('p-sel').value = cfg.pp;
+        updateUI();
     }
+    function applyUI() { document.body.className = `t-${cfg.tIdx}`; }
 
     document.getElementById('pad').addEventListener('touchstart', e => {
-        if(e.target.dataset.val) { e.preventDefault(); e.target.classList.add('pressed'); setTimeout(() => e.target.classList.remove('pressed'), 100); handleInput(e.target.dataset.val); }
+        if(e.target.dataset.val) {
+            e.preventDefault();
+            e.target.classList.add('pressed');
+            setTimeout(() => e.target.classList.remove('pressed'), 100);
+            handleInput(e.target.dataset.val);
+        }
     }, {passive: false});
 </script>
 </body>
